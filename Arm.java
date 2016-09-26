@@ -200,28 +200,14 @@ public class Arm
         }
         //UI.printf("xt:%3.1f, yt:%3.1f\n",xt,yt);
         //UI.printf("theta1:%3.1f, theta2:%3.1f\n",theta1*180/Math.PI,theta2*180/Math.PI);
-        
-        
-         
-        //singularity
-        double opp1 = xt - xj1;
-        double adj1 = yt-yj1;
-        double opp2 = xj2-xt;
-        double adj2 = yt-yj2;
-        double s1 = Math.atan2(opp1,adj1);
-        double s2 = Math.atan2(opp2,adj2);
-        
-        double st = s1 + s2;
-        UI.println("s1:" +s1);
-        UI.println("s2:" +s2);
-        UI.println("singularity angle:" +st);
-        if(st<= Math.PI) return false;
         return true;
-        
-        
-      
     }
 
+    
+//       public void drawOval(){
+//         shape ="oval";
+//         UI.setMouseListener(this::doMouse);
+//     }
     // returns angle of motor 1
     public double get_theta1(){
         return theta1;
@@ -236,18 +222,54 @@ public class Arm
         theta2 = t2;
     }
 
+//     // returns motor control signal
+//     // for motor to be in position(angle) theta1
+//     // linear intepolation
+//     public int get_pwm1(){
+//         int pwm = 0;
+//         return pwm;
+//     }
+//     // ditto for motor 2
+//     public int get_pwm2(){
+//         int pwm =0;
+//         //pwm = (int)(pwm2_90 + (theta2 - 90)*pwm2_slope);
+//         return pwm;
+//     }
+//     
+//     
+    /*calibration points
+    PWM   THETA1 (all negative)
+    1400    108     
+    1450    113
+    1500    118
+    1550    123
+    1600    127
+    1650    132
+    
+    PWM     THETA2 (all negative)
+    1300    44
+    1350    48
+    1400    52
+    1450    57
+    1500    62
+    1550    66
+    */
+  // x=angles
+
     // returns motor control signal
     // for motor to be in position(angle) theta1
     // linear intepolation
     public int get_pwm1(){
-        int pwm = 0;
+        int pwm = (int) ((-10.468 * theta1) + 267.09);
         return pwm;
     }
     // ditto for motor 2
     public int get_pwm2(){
-        int pwm =0;
-        //pwm = (int)(pwm2_90 + (theta2 - 90)*pwm2_slope);
+        int pwm = (int) ((-11.124 * theta2) + 815.02);
         return pwm;
     }
+    
+    
+    
 
 }
