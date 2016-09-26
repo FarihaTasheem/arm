@@ -200,7 +200,26 @@ public class Arm
         }
         //UI.printf("xt:%3.1f, yt:%3.1f\n",xt,yt);
         //UI.printf("theta1:%3.1f, theta2:%3.1f\n",theta1*180/Math.PI,theta2*180/Math.PI);
+        
+        
+         
+        //singularity
+        double opp1 = xt - xj1;
+        double adj1 = yt-yj1;
+        double opp2 = xj2-xt;
+        double adj2 = yt-yj2;
+        double s1 = Math.atan2(opp1,adj1);
+        double s2 = Math.atan2(opp2,adj2);
+        
+        double st = s1 + s2;
+        UI.println("s1:" +s1);
+        UI.println("s2:" +s2);
+        UI.println("singularity angle:" +st);
+        if(st<= Math.PI) return false;
         return true;
+        
+        
+      
     }
 
     // returns angle of motor 1
