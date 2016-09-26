@@ -15,8 +15,8 @@
 - draw pirate Elf. 
 
 ## SINGULARITIES
-- not drawing when arms are parallel 
-- not drawing when motors are both going outwards at the same time
+- not drawing when arms are parallel ✔
+- not drawing when motors are both going outwards at the same time ✔
 
 
 # TO ADD ONTO GOOGLE DOC
