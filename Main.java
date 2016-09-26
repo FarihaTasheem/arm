@@ -44,6 +44,7 @@ public class Main{
         //ServerSocket serverSocket = new ServerSocket(22); 
         
         this.arm = new Arm();
+        this.tool_path = new ToolPath();
         this.drawing = new Drawing();
         this.run();
         arm.draw();
@@ -145,14 +146,19 @@ public class Main{
         String fname = UIFileChooser.open();
         drawing.load_path(fname);
         drawing.draw();
-        
         arm.draw();
     }
     
     // save angles into the file
     public void save_ang(){
-        String fname = UIFileChooser.open();
+        state = 0; 
+        String fname = UIFileChooser.save();
         tool_path.convert_drawing_to_angles(drawing,arm,fname);
+        tool_path.convert_angles_to_pwm(arm);
+        tool_path.save_pwm_file(fname);
+        
+        //sudo./arm
+        
     }
     
     
