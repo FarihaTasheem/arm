@@ -19,4 +19,13 @@
 - not drawing when motors are both going outwards at the same time
 
 
+# TO ADD ONTO GOOGLE DOC
+
+##for xJ2 and yJ2
+-r = hypotenuse
+-due to SOHCAHTOA, the adjacent length is rCosθ2 (hypotenuese x cosangle) --> adjacent length is the x coordinate
+-due to SOHCAHTOA, the opposite length is rSinθ2(hypotenuese x sinangle) --> opposite length is the y coordinate
+
+
+
 
