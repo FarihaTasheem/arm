@@ -31,6 +31,7 @@ public class Main{
         UI.addButton("Load path XY", this::load_xy);
         UI.addButton("Save path Ang", this::save_ang);
         UI.addButton("Load path Ang:Play", this::load_ang);
+        UI.addButton("Send to PI", this::toPi);
         UI.addButton("CIRCLE", this::doCircle);
         UI.addButton("Quit", UI::quit);
         UI.setMouseMotionListener(this::doMouse);
@@ -42,6 +43,28 @@ public class Main{
         this.drawing = new Drawing();
         this.run();
         arm.draw();
+    }
+
+    public void toPi() {
+
+        /*try {
+        ProcessBuilder build = new ProcessBuilder("script", "test", //-->IP ADRESS FOR OUR PI//"scp line.txt pi@10.140.66.166:/home/pi/Arm/");
+        Process p = build.start();
+        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
+        InputStream stream = p.getInputStream();
+        Scanner s = new Scanner(stream);
+        while (p.isAlive()) {
+        String st = s.next();
+        UI.println(st);
+
+        if (st.contains("password"))
+        writer.write("pi\n");
+        writer.flush();
+        }
+
+        }catch(Exception e){
+        UI.println(e);
+        }*/
     }
 
     public void doCircle(){
@@ -135,6 +158,7 @@ public class Main{
             }
         }
     }
+
     public void save_xy(){
         state = 0;
         String fname = UIFileChooser.save();
