@@ -43,11 +43,11 @@ public class Main{
         this.run();
         arm.draw();
     }
+
     public void doCircle(){
         state = 4;
     }
 
-    
     public void doKeys(String action){
         UI.printf("Key :%s \n", action);
         if (action.equals("b")) {
@@ -116,31 +116,25 @@ public class Main{
             drawing.print_path();
             state = 2;
         }
-        
-       if ((state == 4) &&(action.equals("clicked"))){
+
+        if ((state == 4) &&(action.equals("clicked"))){
             double x1 = x ;
             double y1 = y ;
             if(arm.inverseKinematic(x1,y1) == true){
-            for(int i = 0; i<=360; i=i+5){
-                
-                x1 = x + (100/2)*Math.cos(i*Math.PI/180);
-                y1 = y + (100/2)*Math.sin(i*Math.PI/180);
-                
-                drawing.add_point_to_path(x1,y1,true);
-                arm.inverseKinematic(x1,y1);
-                //arm.draw();
-                drawing.draw();
-                drawing.print_path();
+                for(int i = 0; i<=360; i=i+5){
+                    double radius = 50;
+                    x1 = x + radius*Math.cos(i*Math.PI/180);
+                    y1 = y + radius*Math.sin(i*Math.PI/180)- radius;
+
+                    drawing.add_point_to_path(x1,y1,true);
+                    arm.inverseKinematic(x1,y1);
+                    //arm.draw();
+                    drawing.draw();
+                    drawing.print_path();
+                }
             }
         }
-            
-            
-       
-            
-        }
-
     }
-    
     public void save_xy(){
         state = 0;
         String fname = UIFileChooser.save();
@@ -178,6 +172,7 @@ public class Main{
 
     public void load_ang(){
     }
+
     public void run() {
         while(true) {
             arm.draw();
