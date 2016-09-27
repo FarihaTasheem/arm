@@ -124,12 +124,12 @@ public class Arm
         double ya = yj1 + 0.5*(yj2-yj1);
         // distance between joints
         double d = Math.sqrt(((xj2-xj1)*(xj2-xj1)) + ((yj2-yj1)*(yj2-yj1)));
-        
+
         if (d<2*r){
             valid_state = true;
             // half distance between tool positions            
             double h = Math.sqrt((r*r) - ((d*d)/4));
-         
+
             double alpha = Math.atan((yj1-yj2)/(xj2-xj1));
             // tool position
             double xt = xa + h*Math.cos((Math.PI/2) - alpha);
@@ -198,8 +198,8 @@ public class Arm
             UI.println("Ange 2 -invalid");
             return false;
         }
-        
-                double opp1 = xt - xj1;
+
+        double opp1 = xt - xj1;
         double adj1 = yt - yj1;
         double opp2 = xj2 - xt;
         double adj2 = yt - yj2; 
@@ -208,18 +208,17 @@ public class Arm
         double st = s1 + s2;
         UI.println("singularity angle:" +st);
         if(st<= Math.PI) return false;
-    
+
         //UI.printf("xt:%3.1f, yt:%3.1f\n",xt,yt);
         //UI.printf("theta1:%3.1f, theta2:%3.1f\n",theta1*180/Math.PI,theta2*180/Math.PI);
         return true;
     }
 
-    
     //singularity
-//       public void drawOval(){
-//         shape ="oval";
-//         UI.setMouseListener(this::doMouse);
-//     }
+    //       public void drawOval(){
+    //         shape ="oval";
+    //         UI.setMouseListener(this::doMouse);
+    //     }
     // returns angle of motor 1
     public double get_theta1(){
         return theta1;
@@ -234,21 +233,21 @@ public class Arm
         theta2 = t2;
     }
 
-//     // returns motor control signal
-//     // for motor to be in position(angle) theta1
-//     // linear intepolation
-//     public int get_pwm1(){
-//         int pwm = 0;
-//         return pwm;
-//     }
-//     // ditto for motor 2
-//     public int get_pwm2(){
-//         int pwm =0;
-//         //pwm = (int)(pwm2_90 + (theta2 - 90)*pwm2_slope);
-//         return pwm;
-//     }
-//     
-//     
+    //     // returns motor control signal
+    //     // for motor to be in position(angle) theta1
+    //     // linear intepolation
+    //     public int get_pwm1(){
+    //         int pwm = 0;
+    //         return pwm;
+    //     }
+    //     // ditto for motor 2
+    //     public int get_pwm2(){
+    //         int pwm =0;
+    //         //pwm = (int)(pwm2_90 + (theta2 - 90)*pwm2_slope);
+    //         return pwm;
+    //     }
+    //     
+    //     
     /*calibration points
     PWM   THETA1 (all negative)
     1400    108     
@@ -257,7 +256,7 @@ public class Arm
     1550    123
     1600    127
     1650    132
-    
+
     PWM     THETA2 (all negative)
     1300    44
     1350    48
@@ -265,23 +264,39 @@ public class Arm
     1450    57
     1500    62
     1550    66
-    */
-  // x=angles
+     */
+    // x=angles
 
     // returns motor control signal
     // for motor to be in position(angle) theta1
     // linear intepolation
     public int get_pwm1(){
-        int pwm = (int) ((-10.468 * theta1) + 267.09);
+       // int pwm = (int) ((-10.468 * theta1) + 267.09);
+       //int pwm = (int) ((-10.524 * theta1) + 198.56);
+       //int pwm = (int) ((-9.8162 * theta1) + 314.34);
+        int pwm = (int) ((-10.624 * theta1) + 185.9);
+       
         return pwm;
     }
     // ditto for motor 2
     public int get_pwm2(){
-        int pwm = (int) ((-11.124 * theta2) + 815.02);
+       // int pwm = (int) ((-11.124 * theta2) + 815.02);
+      // int pwm = (int) ((-9.863 * theta2) + 883.22);
+      // int pwm = (int) ((-9.9696 * theta2) + 1034.5);
+       int pwm = (int) ((-10.309 * theta2) + 845.36);
+       
         return pwm;
     }
+
+    //
     
     
     
+    // returns motor control signal
+    // for motor to be in position(angle) theta1
+    // linear intepolation
+  
+    // ditto for motor 2
+ 
 
 }
