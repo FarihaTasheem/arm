@@ -31,7 +31,6 @@ public class Main{
         UI.addButton("Load path XY", this::load_xy);
         UI.addButton("Save path Ang", this::save_ang);
         UI.addButton("Load path Ang:Play", this::load_ang);
-        UI.addButton("Send to PI", this::toPi);
         UI.addButton("CIRCLE", this::doCircle);
         UI.addButton("Quit", UI::quit);
         UI.setMouseMotionListener(this::doMouse);
@@ -43,28 +42,6 @@ public class Main{
         this.drawing = new Drawing();
         this.run();
         arm.draw();
-    }
-
-    public void toPi() {
-
-        /*try {
-        ProcessBuilder build = new ProcessBuilder("script", "test", //-->IP ADRESS FOR OUR PI//"scp line.txt pi@10.140.66.166:/home/pi/Arm/");
-        Process p = build.start();
-        BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
-        InputStream stream = p.getInputStream();
-        Scanner s = new Scanner(stream);
-        while (p.isAlive()) {
-        String st = s.next();
-        UI.println(st);
-
-        if (st.contains("password"))
-        writer.write("pi\n");
-        writer.flush();
-        }
-
-        }catch(Exception e){
-        UI.println(e);
-        }*/
     }
 
     public void doCircle(){
@@ -140,20 +117,23 @@ public class Main{
             state = 2;
         }
 
-        if ((state == 4) &&(action.equals("clicked"))){
-            double x1 = x ;
-            double y1 = y ;
-            if(arm.inverseKinematic(x1,y1) == true){
+        if(arm.inverseKinematic(x,y) == true){
+            if ((state == 4) &&(action.equals("clicked"))){
+                double radius = 30;
+                double x1 = x ;
+                double y1 = y ;
+                //translate the centre point
                 for(int i = 0; i<=360; i=i+5){
-                    double radius = 50;
-                    x1 = x + radius*Math.cos(i*Math.PI/180);
-                    y1 = y + radius*Math.sin(i*Math.PI/180)- radius;
+
+                    x1 = x + (radius)*Math.cos(i*Math.PI/180);
+                    y1 = y + (radius)*Math.sin(i*Math.PI/180)-radius;
 
                     drawing.add_point_to_path(x1,y1,true);
                     arm.inverseKinematic(x1,y1);
                     //arm.draw();
                     drawing.draw();
                     drawing.print_path();
+
                 }
             }
         }
@@ -187,8 +167,6 @@ public class Main{
         state = 0; 
         String fname = UIFileChooser.save();
         tool_path.convert_drawing_to_angles(drawing,arm,fname);
-        tool_path.convert_angles_to_pwm(arm);
-        tool_path.save_pwm_file(fname);
 
         //sudo./arm
 
