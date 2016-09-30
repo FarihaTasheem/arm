@@ -48,7 +48,7 @@ public class Main{
     public void toPi() {
 
         /*try {
-        ProcessBuilder build = new ProcessBuilder("script", "test", //-->IP ADRESS FOR OUR PI//"scp line.txt pi@10.140.66.166:/home/pi/Arm/");
+        ProcessBuilder build = new ProcessBuilder("script", "test", "scp line.txt pi@10.140.68.181:/home/pi/arm/");
         Process p = build.start();
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
         InputStream stream = p.getInputStream();
