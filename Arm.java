@@ -198,6 +198,7 @@ public class Arm
             UI.println("Ange 2 -invalid");
             return false;
         }
+        //SINGULARITYYY
 
         double opp1 = xt - xj1;
         double adj1 = yt - yj1;
